@@ -8,7 +8,8 @@ i18next
   .use(initReactI18next) // Initialize i18n for React
   .use(LanguageDetector)
   .init({
-    fallbackLng: "en",
+    lng: localStorage.getItem("i18nextLng") || "zh",
+    fallbackLng: "zh",
     debug: import.meta.env.DEV,
     defaultNS,
     resources,
