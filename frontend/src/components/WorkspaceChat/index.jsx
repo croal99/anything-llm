@@ -95,7 +95,7 @@ export default function WorkspaceChat({ loading, workspace }) {
                 </div>
               </div>
               <div className="py-7 px-9 space-y-2 flex-col">
-                <p className="text-white text-sm">
+                <p className="text-theme-text-primary text-sm">
                   The workspace you're looking for is not available. It may have
                   been deleted or you may not have access to it.
                 </p>
@@ -103,7 +103,7 @@ export default function WorkspaceChat({ loading, workspace }) {
               <div className="flex w-full justify-end items-center p-6 space-x-2 border-t border-theme-modal-border rounded-b">
                 <a
                   href={paths.home()}
-                  className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
+                  className="transition-all duration-300 bg-primary-button text-white hover:opacity-90 px-4 py-2 rounded-lg text-sm"
                 >
                   Return to homepage
                 </a>
