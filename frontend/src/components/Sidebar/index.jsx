@@ -27,6 +27,9 @@ export default function Sidebar() {
     hideModal: hideNewWsModal,
   } = useNewWorkspaceModal();
 
+  // console.log("showSidebar", showSidebar);
+  // console.log("canToggleSidebar", canToggleSidebar); //  TODO：这里需要考虑一下是否有Bug
+
   return (
     <>
       <div

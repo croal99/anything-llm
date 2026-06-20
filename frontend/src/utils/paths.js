@@ -21,6 +21,9 @@ function applyOptions(path, options = {}) {
 
 export default {
   home: () => {
+    return "http://localhost/home/";
+  },
+  home1: () => {
     return "/";
   },
   login: (noTry = false) => {
