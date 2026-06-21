@@ -1,0 +1,31 @@
+# Anything-LLM
+# 完成界面优化
+
+# 单独测试时使用的名字
+name: redamon
+
+services:
+  anything-llm:
+    container_name: anythingllm
+    build:
+      # context: ../.
+      dockerfile: ./docker/Dockerfile
+      args: 
+        ARG_UID: ${UID:-1000}
+        ARG_GID: ${GID:-1000}
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - "./.env:/app/server/.env"
+      - "./storage/server:/app/server/storage"
+      - "./storage/hotdir/:/app/collector/hotdir"
+      - "./storage/outputs/:/app/collector/outputs"
+    user: "${UID:-1000}:${GID:-1000}"
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    # networks:
+    #   - anything-llm
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
