@@ -20,10 +20,10 @@ function applyOptions(path, options = {}) {
 }
 
 export default {
-  home: () => {
+  home2: () => {
     return "http://localhost/home/";
   },
-  home1: () => {
+  home: () => {
     return "/";
   },
   login: (noTry = false) => {
