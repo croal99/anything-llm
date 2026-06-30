@@ -17,6 +17,7 @@ import { Tooltip } from "react-tooltip";
 import { createPortal } from "react-dom";
 
 export default function Sidebar() {
+  const [homeUrl, setHomeUrl] = useState('http://home.bluescan.com')
   const { user } = useUser();
   const { logo } = useLogo();
   const sidebarRef = useRef(null);
@@ -29,8 +30,14 @@ export default function Sidebar() {
 
   // console.log("showSidebar", showSidebar);
   // console.log("canToggleSidebar", canToggleSidebar); //  TODO：这里需要考虑一下是否有Bug
+  useEffect(() => {
+    const { protocol, port } = window.location
+    const portSuffix = port ? `:${port}` : ''
+    setHomeUrl(`${protocol}//home.bluescan.com${portSuffix}`)
+  }, [])
 
   return (
+    
     <>
       <div
         style={{
@@ -48,7 +55,7 @@ export default function Sidebar() {
         <div className="overflow-hidden h-full">
           <div className="flex shrink-0 w-full justify-center my-[18px]">
             <div className="flex w-[250px] min-w-[250px]">
-              <Link to={paths.home()} aria-label="Home">
+              <Link to={homeUrl} aria-label="Home">
                 <img
                   src={logo}
                   alt="Logo"

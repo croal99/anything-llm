@@ -58,22 +58,28 @@ export default {
     },
   },
   github: () => {
-    return "https://github.com/Mintplex-Labs/anything-llm";
+    return "";
+    // return "https://github.com/Mintplex-Labs/anything-llm";
   },
   discord: () => {
-    return "https://discord.com/invite/6UyHPeGZAC";
+    return "";
+    // return "https://discord.com/invite/6UyHPeGZAC";
   },
   docs: (path = "") => {
-    return `https://docs.anythingllm.com${path}`;
+    return "";
+    // return `https://docs.anythingllm.com${path}`;
   },
   chatModes: () => {
-    return "https://docs.anythingllm.com/features/chat-modes";
+    return "";
+    // return "https://docs.anythingllm.com/features/chat-modes";
   },
   mailToMintplex: () => {
-    return "mailto:team@mintplexlabs.com";
+    return "";
+    // return "mailto:team@mintplexlabs.com";
   },
   hosting: () => {
-    return "https://my.mintplexlabs.com/aio-checkout?product=anythingllm";
+    return "";
+    // return "https://my.mintplexlabs.com/aio-checkout?product=anythingllm";
   },
   workspace: {
     chat: (slug, options = {}) => {

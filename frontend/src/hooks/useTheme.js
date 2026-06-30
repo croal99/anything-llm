@@ -1,5 +1,5 @@
 import { REFETCH_LOGO_EVENT } from "@/LogoContext";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const availableThemes = {
   system: "System",
@@ -20,67 +20,37 @@ const availableThemes = {
  */
 
 /**
- * Determines the current theme of the application.
- * "system" follows the OS preference, "light" and "dark" force that mode.
+ * Always returns dark theme.
+ * theme 硬编码为 "dark"，isLight 硬编码为 false
+ * 移除了 useState、matchMedia 监听、dev keybind 等所有切换逻辑
+ * 保留 setTheme() 为空函数（no-op），确保调用方不会报错
+ * 保留 availableThemes，确保调用方解构不会出错
+ * 保留 useEffect 设置 data-theme="dark" 和触发 REFETCH_LOGO_EVENT，确保 DOM 正确应用 dark 模式
  * @returns {UseThemeResult}
  */
 export function useTheme() {
-  const [theme, _setTheme] = useState(() => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "default") return "dark"; // migrate legacy value
-    return stored || "system";
-  });
+  const theme = "dark";
+  const isLight = false;
 
-  const [systemTheme, setSystemTheme] = useState(() =>
-    window.matchMedia?.("(prefers-color-scheme: light)").matches
-      ? "light"
-      : "dark"
-  );
-
-  // Listen for OS level theme changes
+  // Apply dark theme to DOM
   useEffect(() => {
-    if (!window.matchMedia) return;
-    const mql = window.matchMedia("(prefers-color-scheme: light)");
-    const handler = (e) => setSystemTheme(e.matches ? "light" : "dark");
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
-
-  const resolvedTheme = theme === "system" ? systemTheme : theme;
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", resolvedTheme);
-    document.body.classList.toggle("light", resolvedTheme === "light");
-    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", "dark");
+    document.body.classList.remove("light");
     window.dispatchEvent(new Event(REFETCH_LOGO_EVENT));
-  }, [resolvedTheme, theme]);
-
-  // In development, attach keybind combinations to toggle theme
-  useEffect(() => {
-    if (!import.meta.env.DEV) return;
-    function toggleOnKeybind(e) {
-      if (e.metaKey && e.key === ".") {
-        e.preventDefault();
-        _setTheme((prev) => (prev === "light" ? "dark" : "light"));
-      }
-    }
-    document.addEventListener("keydown", toggleOnKeybind);
-    return () => document.removeEventListener("keydown", toggleOnKeybind);
   }, []);
 
   /**
-   * Sets the theme of the application and runs any
-   * other necessary side effects
+   * No-op: theme is always dark, kept for API compatibility.
    * @param {ThemeOption} newTheme The new theme to set
    */
   function setTheme(newTheme) {
-    _setTheme(newTheme);
+    // intentionally empty - theme is always dark
   }
 
   return {
     theme,
     setTheme,
     availableThemes,
-    isLight: resolvedTheme === "light",
+    isLight,
   };
 }

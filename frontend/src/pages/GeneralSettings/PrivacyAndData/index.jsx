@@ -49,7 +49,7 @@ export default function PrivacyAndDataHandling() {
           ) : (
             <div className="overflow-x-auto flex flex-col gap-y-6 pt-6">
               <ProviderPrivacy />
-              <TelemetryLogs settings={settings} />
+              {/* <TelemetryLogs settings={settings} /> */}
             </div>
           )}
         </div>
