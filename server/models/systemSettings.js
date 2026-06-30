@@ -469,7 +469,7 @@ const SystemSettings = {
       MultiUserMode: await this.isMultiUserMode(),
       MemoryEnabled: await this.memoriesEnabled(),
       MemoryAutoExtraction: await this.memoryAutoExtractionSetting(),
-      DisableTelemetry: process.env.DISABLE_TELEMETRY || "false",
+      DisableTelemetry: process.env.DISABLE_TELEMETRY || "true",
 
       // --------------------------------------------------------
       // Embedder Provider Selection Settings & Configs
